@@ -1,88 +1,30 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#101810">
-<title>Snake 300 — Jogo da Cobrinha</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#050b08">
+<title>SNAKE 300 — Neon Edition</title>
 <style>
-:root{--bg:#101810;--panel:#1b281c;--green:#8ee36b;--green2:#4ba83c;--cream:#f3f7e9;--muted:#b6c5b0;--line:#334532;--gold:#f4cc67}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#203222,#0b100b 70%);color:var(--cream);font:16px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
-header{text-align:center;padding:22px 15px 10px}header .mark{font-size:38px;line-height:1}h1{margin:7px 0 3px;font-size:28px;letter-spacing:1px}header p{margin:0;color:var(--muted);font-size:13px}
-main{width:min(560px,100%);margin:auto;padding:12px;display:grid;gap:12px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;text-align:center;padding:10px 5px}.stat span{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}.stat strong{display:block;color:var(--green);font-size:22px;margin-top:2px}
-.gamebox{background:#0b130c;border:2px solid #3d5a37;border-radius:16px;padding:8px;box-shadow:0 12px 35px #0008}canvas{display:block;width:100%;aspect-ratio:1/1;border-radius:8px;touch-action:none}
-.message{text-align:center;color:var(--muted);min-height:23px;font-size:13px;margin-top:8px}
-.actions{display:flex;gap:8px}.btn{flex:1;border:1px solid var(--line);border-radius:11px;background:#253725;color:var(--cream);padding:12px;font:700 14px system-ui;cursor:pointer}.btn.primary{background:var(--green);color:#11200f;border-color:var(--green)}.btn:active{transform:scale(.98)}
-.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:220px;margin:0 auto}.dir{height:52px;font-size:24px;padding:0;background:#243a25;border:1px solid #3f6540;color:#dfffd5;border-radius:12px;touch-action:manipulation}.empty{visibility:hidden}
-.help{font-size:12px;color:var(--muted);text-align:center;line-height:1.5}.bottom{background:#162218;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:13px;line-height:1.5;color:#c9d8c2}
-@media(min-width:520px){main{padding-bottom:24px}}
-</style>
-</head>
-<body>
-<header><div class="mark">🐍</div><h1>SNAKE <span style="color:var(--green)">300</span></h1><p>O clássico jogo da cobrinha — 300 fases para vencer!</p></header>
+:root{--bg:#050b08;--panel:#0b1711;--green:#39ff88;--green2:#12c965;--text:#eafff1;--muted:#91b5a0;--line:#17452d;--accent:#b7ff43;--glow:rgba(57,255,136,.25)}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);background:radial-gradient(ellipse at 50% -10%,#103d28 0,#07150d 40%,var(--bg) 75%);font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}header{text-align:center;padding:23px 12px 12px}header .logo{font-size:40px;filter:drop-shadow(0 0 12px var(--green))}h1{font-size:clamp(25px,7vw,36px);letter-spacing:3px;margin:3px 0;color:var(--green);text-shadow:0 0 18px var(--glow)}header p{margin:0;color:var(--muted);font-size:13px}main{width:min(560px,100%);margin:auto;padding:12px;display:grid;gap:12px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat,.panel{background:linear-gradient(145deg,#10251a,#08120c);border:1px solid var(--line);border-radius:14px}.stat{text-align:center;padding:10px 4px;box-shadow:inset 0 0 18px #0a2415}.stat span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1.2px}.stat strong{display:block;color:var(--green);font-size:22px;margin-top:2px;text-shadow:0 0 12px var(--glow)}.gamebox{background:#030805;border:1px solid #23824b;border-radius:17px;padding:8px;box-shadow:0 0 0 1px #0b2818,0 0 28px var(--glow)}canvas{display:block;width:100%;aspect-ratio:1;border-radius:9px;touch-action:none}.message{text-align:center;color:var(--muted);min-height:36px;padding:9px 4px 2px;font-size:13px}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.btn,select{font:700 13px system-ui;border:1px solid #23623e;border-radius:11px;background:#10251a;color:var(--text);padding:12px 8px;cursor:pointer}.btn.primary{background:var(--green);color:#041109;border-color:var(--green);box-shadow:0 0 16px var(--glow)}.btn:active{transform:scale(.98)}.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:min(240px,80%);margin:0 auto}.dir{height:52px;font-size:23px;padding:0;background:#0e2a1b;border:1px solid #26754a;color:var(--green);border-radius:12px;touch-action:manipulation;box-shadow:inset 0 0 12px #0b2416}.empty{visibility:hidden}.options{padding:13px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:grid;gap:6px}.field label{font-size:12px;color:var(--muted)}select{width:100%;padding:10px}.toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text)}input[type=checkbox]{accent-color:var(--green);width:18px;height:18px}.help,.bottom{color:var(--muted);font-size:12px;line-height:1.55;text-align:center}.bottom{padding:13px;text-align:left}.bottom b{color:var(--green)}footer{text-align:center;padding:4px 10px 22px;color:#537662;font-size:11px}@media(min-width:520px){main{padding-bottom:20px}}
+</style></head>
+<body><header><div class="logo">🐍</div><h1>SNAKE 300</h1><p>NEON EDITION · 300 FASES · DESAFIE SEU RECORDE</p></header>
 <main>
-<div class="stats">
-<div class="stat"><span>Fase</span><strong id="level">1 / 300</strong></div>
-<div class="stat"><span>Pontos</span><strong id="score">0</strong></div>
-<div class="stat"><span>Recorde</span><strong id="best">0</strong></div>
-</div>
-<section class="gamebox"><canvas id="game" width="400" height="400" aria-label="Tabuleiro do jogo da cobrinha"></canvas><div class="message" id="message">Toque em Jogar para começar!</div></section>
+<div class="stats"><div class="stat"><span>Fase</span><strong id="level">1 / 300</strong></div><div class="stat"><span>Pontos</span><strong id="score">0</strong></div><div class="stat"><span>Recorde</span><strong id="best">0</strong></div></div>
+<section class="gamebox"><canvas id="game" width="400" height="400" aria-label="Tabuleiro do jogo da cobrinha"></canvas><div class="message" id="message" aria-live="polite">Toque em Jogar para começar!</div></section>
 <div class="actions"><button class="btn primary" id="start">▶ Jogar</button><button class="btn" id="pause">Ⅱ Pausar</button><button class="btn" id="restart">↻ Reiniciar</button></div>
-<div class="controls" aria-label="Controles">
-<button class="dir empty"> </button><button class="dir" data-dir="up" aria-label="Cima">▲</button><button class="dir empty"> </button>
-<button class="dir" data-dir="left" aria-label="Esquerda">◀</button><button class="dir" data-dir="down" aria-label="Baixo">▼</button><button class="dir" data-dir="right" aria-label="Direita">▶</button>
-</div>
-<div class="help">No computador: use as setas do teclado ou WASD. No celular: use os botões acima ou deslize no tabuleiro.</div>
-<div class="bottom"><b>Como passar de fase:</b> coma as frutas até atingir a meta da fase. A cada fase, a cobrinha fica um pouco mais rápida e a meta aumenta. São 300 fases; seu progresso e recorde ficam salvos neste aparelho.</div>
-</main>
+<div class="controls" aria-label="Controles direcionais"><button class="dir empty" tabindex="-1"> </button><button class="dir" data-dir="up" aria-label="Cima">▲</button><button class="dir empty" tabindex="-1"> </button><button class="dir" data-dir="left" aria-label="Esquerda">◀</button><button class="dir" data-dir="down" aria-label="Baixo">▼</button><button class="dir" data-dir="right" aria-label="Direita">▶</button></div>
+<section class="panel options"><div class="field"><label for="skin">COR DA COBRINHA</label><select id="skin"><option value="neon">Verde neon</option><option value="blue">Azul elétrico</option><option value="purple">Roxo cósmico</option><option value="gold">Dourado</option><option value="pink">Rosa neon</option></select></div><div class="field"><label for="difficulty">DIFICULDADE</label><select id="difficulty"><option value="normal">Normal</option><option value="easy">Tranquila</option><option value="hard">Insana</option></select></div><label class="toggle"><input id="sound" type="checkbox" checked> Sons ativados</label><label class="toggle"><input id="grid" type="checkbox" checked> Grade neon</label></section>
+<div class="help">Computador: setas ou WASD · Espaço pausa · Celular: botões ou deslize sobre o tabuleiro.</div>
+<div class="panel bottom"><b>Como jogar:</b> coma as frutas para marcar pontos e completar a meta de cada fase. A velocidade aumenta aos poucos. São 300 fases! Recorde, progresso e preferências ficam salvos neste dispositivo.</div>
+</main><footer>FEITO PARA QUEM NÃO DESISTE · SNAKE 300</footer>
 <script>
-(()=>{
-const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
-const $=id=>document.getElementById(id);
-const N=20,CELL=20,MAX=300;
-let snake,dir,nextDir,food,score,level,eaten,goal,running=false,paused=false,dead=false,timer=null;
-let best=Number(localStorage.getItem('snake300best')||0);
-let saved;try{saved=JSON.parse(localStorage.getItem('snake300save')||'null')}catch(e){}
-$('best').textContent=best;
-function init(keep=false){
- clearInterval(timer);timer=null;snake=[{x:9,y:10},{x:8,y:10},{x:7,y:10}];dir={x:1,y:0};nextDir={x:1,y:0};
- score=keep&&saved?saved.score||0:0;level=keep&&saved?saved.level||1:1;eaten=keep&&saved?saved.eaten||0:0;
- level=Math.max(1,Math.min(MAX,level));goal=goalFor(level);food=makeFood();running=false;paused=false;dead=false;
- updateStats();draw();$('message').textContent='Toque em Jogar para começar!';
-}
-function goalFor(l){return 5+Math.floor((l-1)*0.7)}
-function speed(){return Math.max(65,175-(level-1)*0.35)}
-function makeFood(){let p;do{p={x:Math.floor(Math.random()*N),y:Math.floor(Math.random()*N)}}while(snake.some(s=>s.x===p.x&&s.y===p.y));return p}
-function draw(){
- ctx.fillStyle='#0c160d';ctx.fillRect(0,0,400,400);
- ctx.strokeStyle='rgba(116,163,103,.10)';ctx.lineWidth=1;
- for(let i=0;i<=N;i++){ctx.beginPath();ctx.moveTo(i*CELL,0);ctx.lineTo(i*CELL,400);ctx.stroke();ctx.beginPath();ctx.moveTo(0,i*CELL);ctx.lineTo(400,i*CELL);ctx.stroke()}
- // subtle level badge
- ctx.fillStyle='#f4cc67';ctx.beginPath();ctx.arc(food.x*CELL+10,food.y*CELL+10,7,0,Math.PI*2);ctx.fill();
- ctx.fillStyle='#fff1ae';ctx.beginPath();ctx.arc(food.x*CELL+7,food.y*CELL+7,2,0,Math.PI*2);ctx.fill();
- snake.forEach((s,i)=>{ctx.fillStyle=i===0?'#b9ff91':'#61c94c';roundRect(ctx,s.x*CELL+1,s.y*CELL+1,CELL-2,CELL-2,5);ctx.fill();if(i===0){ctx.fillStyle='#153014';const ex=s.x*CELL+10+(dir.x===1?4:dir.x===-1?-4:0),ey=s.y*CELL+10+(dir.y===1?4:dir.y===-1?-4:0);ctx.beginPath();ctx.arc(ex+(dir.y===0?0:-3),ey+(dir.x===0?0:-3),2,0,7);ctx.arc(ex+(dir.y===0?0:3),ey+(dir.x===0?0:3),2,0,7);ctx.fill()}});
- if(!running){ctx.fillStyle='rgba(0,0,0,.35)';ctx.fillRect(0,0,400,400)}
-}
-function roundRect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
-function updateStats(){$('level').textContent=level+' / '+MAX;$('score').textContent=score;$('best').textContent=best}
-function save(){localStorage.setItem('snake300save',JSON.stringify({score,level,eaten}));}
-function start(){if(dead){init(false)}if(!running){running=true;paused=false;$('message').textContent='Boa sorte! Meta da fase: '+goal+' frutas.';loop()}else if(paused){paused=false;loop();$('message').textContent='Jogo retomado.'}}
-function loop(){clearInterval(timer);if(!running||paused)return;timer=setInterval(tick,speed())}
-function tick(){
- dir=nextDir;const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
- if(head.x<0||head.x>=N||head.y<0||head.y>=N||snake.some((s,i)=>i>0&&s.x===head.x&&s.y===head.y)){gameOver();return}
- snake.unshift(head);
- if(head.x===food.x&&head.y===food.y){score+=10;eaten++;if(score>best){best=score;localStorage.setItem('snake300best',best)}if(eaten>=goal){if(level===MAX){winAll();return}level++;eaten=0;goal=goalFor(level);$('message').textContent='Fase '+(level-1)+' concluída! Agora: fase '+level+'.';}food=makeFood();updateStats();save();clearInterval(timer);draw();loop();return}
- snake.pop();draw();
-}
-function gameOver(){clearInterval(timer);running=false;dead=true;draw();ctx.fillStyle='rgba(0,0,0,.62)';ctx.fillRect(0,0,400,400);ctx.textAlign='center';ctx.fillStyle='#ffb4a9';ctx.font='bold 28px system-ui';ctx.fillText('FIM DE JOGO',200,190);ctx.fillStyle='#fff';ctx.font='16px system-ui';ctx.fillText('Pontuação: '+score,200,220);$('message').textContent='A cobrinha bateu! Toque em Jogar para tentar novamente.';save()}
-function winAll(){clearInterval(timer);running=false;dead=true;draw();ctx.fillStyle='rgba(0,0,0,.68)';ctx.fillRect(0,0,400,400);ctx.textAlign='center';ctx.fillStyle='#f4cc67';ctx.font='bold 28px system-ui';ctx.fillText('VOCÊ VENCEU!',200,190);ctx.fillStyle='#fff';ctx.font='16px system-ui';ctx.fillText('300 fases concluídas!',200,220);$('message').textContent='Lendário! Você completou as 300 fases.';save()}
-function setDir(d){const map={up:{x:0,y:-1},down:{x:0,y:1},left:{x:-1,y:0},right:{x:1,y:0}};const v=map[d];if(!v)return;if(v.x===-dir.x&&v.y===-dir.y)return;nextDir=v;if(!running&&!dead)start()}
-document.querySelectorAll('[data-dir]').forEach(b=>{b.addEventListener('click',()=>setDir(b.dataset.dir));});
-document.addEventListener('keydown',e=>{const k=e.key.toLowerCase(),m={'arrowup':'up','w':'up','arrowdown':'down','s':'down','arrowleft':'left','a':'left','arrowright':'right','d':'right'};if(m[k]){e.preventDefault();setDir(m[k])}if(k===' '){e.preventDefault();running&& !paused?(paused=true,clearInterval(timer),$('message').textContent='Jogo pausado.') : start()}});
-let touchX=0,touchY=0;canvas.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;touchY=e.changedTouches[0].clientY},{passive:true});canvas.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX,dy=e.changedTouches[0].clientY-touchY;if(Math.max(Math.abs(dx),Math.abs(dy))<18)return;if(Math.abs(dx)>Math.abs(dy))setDir(dx>0?'right':'left');else setDir(dy>0?'down':'up')},{passive:true});
-$('start').onclick=start;$('pause').onclick=()=>{if(running&&!paused){paused=true;clearInterval(timer);$('message').textContent='Jogo pausado.'}else if(paused)start()};$('restart').onclick=()=>{init(false);start()};
-init(!!saved);
+(()=>{'use strict';const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d');const N=20,CELL=20,MAX=300;const skins={neon:['#baffd0','#39ff88','#12c965'],blue:['#c8f5ff','#36d9ff','#168cff'],purple:['#f0d2ff','#c56bff','#7e36dc'],gold:['#fff2a8','#ffd447','#d99400'],pink:['#ffd0ed','#ff62c5','#d82e91']};let snake,dir,nextDir,food,score,level,eaten,goal,running=false,paused=false,dead=false,timer=null,touchX=0,touchY=0;let best=Number(localStorage.getItem('snake300bestV2')||localStorage.getItem('snake300best')||0);let saveData={};try{saveData=JSON.parse(localStorage.getItem('snake300saveV2')||'{}')}catch(e){}$('best').textContent=best;$('skin').value=saveData.skin||'neon';$('difficulty').value=saveData.difficulty||'normal';$('sound').checked=saveData.sound!==false;$('grid').checked=saveData.grid!==false;
+function persist(){localStorage.setItem('snake300saveV2',JSON.stringify({score,level,eaten,skin:$('skin').value,difficulty:$('difficulty').value,sound:$('sound').checked,grid:$('grid').checked}));localStorage.setItem('snake300bestV2',String(best))}function goalFor(l){return 5+Math.floor((l-1)*.7)}function speed(){let base=$('difficulty').value==='easy'?220:$('difficulty').value==='hard'?115:170;return Math.max(48,base-(level-1)*.32)}function makeFood(){let p;do{p={x:Math.floor(Math.random()*N),y:Math.floor(Math.random()*N)}}while(snake.some(s=>s.x===p.x&&s.y===p.y));return p}
+function init(restore=false){clearInterval(timer);timer=null;snake=[{x:9,y:10},{x:8,y:10},{x:7,y:10}];dir={x:1,y:0};nextDir={x:1,y:0};score=restore?Number(saveData.score)||0:0;level=restore?Number(saveData.level)||1:1;eaten=restore?Number(saveData.eaten)||0:0;level=Math.max(1,Math.min(MAX,level));goal=goalFor(level);food=makeFood();running=false;paused=false;dead=false;updateStats();draw();$('message').textContent='Toque em Jogar para começar!'}
+function roundRect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}function draw(){const skin=skins[$('skin').value]||skins.neon;ctx.clearRect(0,0,400,400);ctx.fillStyle='#030a06';ctx.fillRect(0,0,400,400);if($('grid').checked){ctx.strokeStyle='rgba(57,255,136,.10)';ctx.lineWidth=1;for(let i=0;i<=N;i++){ctx.beginPath();ctx.moveTo(i*CELL,0);ctx.lineTo(i*CELL,400);ctx.stroke();ctx.beginPath();ctx.moveTo(0,i*CELL);ctx.lineTo(400,i*CELL);ctx.stroke()}}ctx.shadowBlur=15;ctx.shadowColor='#ff4b61';ctx.fillStyle='#ff4b61';ctx.beginPath();ctx.arc(food.x*CELL+10,food.y*CELL+10,7,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;snake.forEach((s,i)=>{ctx.shadowBlur=i===0?15:5;ctx.shadowColor=skin[1];ctx.fillStyle=i===0?skin[0]:skin[1];roundRect(ctx,s.x*CELL+1,s.y*CELL+1,CELL-2,CELL-2,5);ctx.fill();if(i===0){ctx.fillStyle='#041009';let ex=s.x*CELL+10+(dir.x===1?4:dir.x===-1?-4:0),ey=s.y*CELL+10+(dir.y===1?4:dir.y===-1?-4:0);ctx.beginPath();ctx.arc(ex+(dir.y===0?0:-3),ey+(dir.x===0?0:-3),2,0,7);ctx.arc(ex+(dir.y===0?0:3),ey+(dir.x===0?0:3),2,0,7);ctx.fill()}});ctx.shadowBlur=0;if(!running){ctx.fillStyle='rgba(0,0,0,.18)';ctx.fillRect(0,0,400,400)}}
+function updateStats(){$('level').textContent=level+' / '+MAX;$('score').textContent=score;$('best').textContent=best}let audioCtx;function sound(type){if(!$('sound').checked)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();osc.connect(gain);gain.connect(audioCtx.destination);osc.type='sine';osc.frequency.value=type==='eat'?660:type==='level'?880:180;gain.gain.setValueAtTime(.07,audioCtx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.12);osc.start();osc.stop(audioCtx.currentTime+.13)}catch(e){}}
+function loop(){clearInterval(timer);if(!running||paused)return;timer=setInterval(tick,speed())}function start(){if(dead)init(false);if(!running){running=true;paused=false;$('message').textContent='Meta: '+goal+' frutas nesta fase. Boa sorte!';loop();draw()}else if(paused){paused=false;loop();$('message').textContent='Jogo retomado.';draw()}}function tick(){dir=nextDir;const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(head.x<0||head.x>=N||head.y<0||head.y>=N||snake.some((s,i)=>i>0&&s.x===head.x&&s.y===head.y)){gameOver();return}snake.unshift(head);if(head.x===food.x&&head.y===food.y){score+=10;eaten++;sound('eat');if(score>best){best=score;localStorage.setItem('snake300bestV2',best)}if(eaten>=goal){if(level===MAX){winAll();return}level++;eaten=0;goal=goalFor(level);sound('level');$('message').textContent='Fase concluída! Agora você está na fase '+level+'.'}else $('message').textContent='Boa! '+eaten+' de '+goal+' frutas nesta fase.';food=makeFood();updateStats();persist();clearInterval(timer);draw();loop();return}snake.pop();draw()}
+function overlay(title,sub,color){draw();ctx.fillStyle='rgba(0,0,0,.72)';ctx.fillRect(0,0,400,400);ctx.textAlign='center';ctx.fillStyle=color;ctx.font='bold 27px system-ui';ctx.fillText(title,200,190);ctx.fillStyle='#effff4';ctx.font='16px system-ui';ctx.fillText(sub,200,222)}function gameOver(){clearInterval(timer);running=false;dead=true;overlay('FIM DE JOGO','Pontuação: '+score,'#ff7183');$('message').textContent='Você bateu! Toque em Jogar para tentar novamente.';sound('over');persist()}function winAll(){clearInterval(timer);running=false;dead=true;overlay('VOCÊ VENCEU!','300 fases concluídas!','#b7ff43');$('message').textContent='Lendário! Você completou as 300 fases!';sound('level');persist()}
+function setDir(d){const map={up:{x:0,y:-1},down:{x:0,y:1},left:{x:-1,y:0},right:{x:1,y:0}},v=map[d];if(!v||v.x===-dir.x&&v.y===-dir.y)return;nextDir=v;if(!running&&!dead)start()}document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>setDir(b.dataset.dir)));document.addEventListener('keydown',e=>{const k=e.key.toLowerCase(),m={arrowup:'up',w:'up',arrowdown:'down',s:'down',arrowleft:'left',a:'left',arrowright:'right',d:'right'};if(m[k]){e.preventDefault();setDir(m[k])}if(k===' '){e.preventDefault();if(running&&!paused){paused=true;clearInterval(timer);$('message').textContent='Jogo pausado.';draw()}else start()}});canvas.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;touchY=e.changedTouches[0].clientY},{passive:true});canvas.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX,dy=e.changedTouches[0].clientY-touchY;if(Math.max(Math.abs(dx),Math.abs(dy))<18)return;if(Math.abs(dx)>Math.abs(dy))setDir(dx>0?'right':'left');else setDir(dy>0?'down':'up')},{passive:true});$('start').onclick=start;$('pause').onclick=()=>{if(running&&!paused){paused=true;clearInterval(timer);$('message').textContent='Jogo pausado.';draw()}else if(paused)start()};$('restart').onclick=()=>{init(false);start()};['skin','difficulty','sound','grid'].forEach(id=>$(id).addEventListener('change',()=>{persist();draw();if(running&&!paused)loop()}));init(!!saveData.level);
 })();
-</script>
-</body></html>
+</script></body></html>
